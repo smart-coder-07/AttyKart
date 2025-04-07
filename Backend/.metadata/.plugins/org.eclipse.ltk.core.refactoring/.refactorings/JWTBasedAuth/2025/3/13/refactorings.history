@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete 3 elements from project &apos;JWTBasedAuth&apos;&#x0D;&#x0A;- Original project: &apos;JWTBasedAuth&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     JWTBasedAuth/src/main/java/controller&#x0D;&#x0A;     JWTBasedAuth/src/main/java/model&#x0D;&#x0A;     JWTBasedAuth/src/main/java/Repository" description="Delete elements" element1="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;model" element2="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;controller" element3="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;Repository" elements="3" flags="589830" id="org.eclipse.jdt.ui.delete" resources="0" stamp="1742894122651" subPackages="false" version="1.0"/>
+</session>

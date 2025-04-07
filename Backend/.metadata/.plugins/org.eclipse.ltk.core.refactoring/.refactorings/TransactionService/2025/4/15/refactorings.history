@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;Transaction.java&apos; to &apos;OrderService/src/main/java/com.order.model&apos;&#x0D;&#x0A;- Original project: &apos;TransactionService&apos;&#x0D;&#x0A;- Destination element: &apos;OrderService/src/main/java/com.order.model&apos;&#x0D;&#x0A;- Original element: &apos;com.transaction.model.Transaction.java&apos;" description="Copy compilation unit" destination="=OrderService/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.order.model" element1="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.transaction.model{Transaction.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1743924741962" units="1" version="1.0"/>
+</session>

@@ -1,0 +1,29 @@
+package com.mail.service;
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.stereotype.Service;
+
+import com.mail.model.NotificationRequest;
+
+@Service
+@RequiredArgsConstructor
+public class NotificationService {
+
+    private final JavaMailSender mailSender;
+
+    public String sendEmail(NotificationRequest request) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(request.getUserEmail());
+        message.setSubject(request.getSubject());
+        message.setText(request.getMessage());
+        mailSender.send(message);
+        return "Mail send successfully";
+    }
+
+    public void sendSms(NotificationRequest request) {
+        // Just log SMS (simulate)
+        System.out.println("Sending SMS to " + request + ": " + request.getMessage());
+    }
+}

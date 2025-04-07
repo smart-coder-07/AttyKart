@@ -1,0 +1,84 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-ApiGatewayApplication<ApiGateway>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.gateway.ApiGatewayApplication",
+      "projectName": "ApiGateway",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-CartServiceApplication<CartService>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.cart.CartServiceApplication",
+      "projectName": "CartService",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-EurekaServerApplication<EurekaServer>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.eureka.EurekaServerApplication",
+      "projectName": "EurekaServer",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-OrderServiceApplication<OrderService>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.order.OrderServiceApplication",
+      "projectName": "OrderService",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-ProductApplication<Product>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.product.ProductApplication",
+      "projectName": "Product",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-TransactionServiceApplication<TransactionService>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.transaction.TransactionServiceApplication",
+      "projectName": "TransactionService",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-UserServiceApplication<UserService>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.user.UserServiceApplication",
+      "projectName": "UserService",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-WalletServiceApplication<WalletService>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.wallet.WalletServiceApplication",
+      "projectName": "WalletService",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}

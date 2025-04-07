@@ -1,0 +1,43 @@
+package com.transaction.service;
+
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.transaction.exception.TransactionNotFoundException;
+import com.transaction.model.Transaction;
+import com.transaction.repository.TransactionRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class TransactionServiceImpl implements TransactionService {
+    private final TransactionRepository transactionRepository;
+
+    @Override
+    public Transaction processTransaction(Transaction transaction) {
+        transaction.setTransactionDate(LocalDate.now());
+        transaction.setTransactionStatus("PENDING");// Default status
+        transaction.setId(transactionRepository.count()+1+"");
+        return transactionRepository.save(transaction);
+    }
+
+    @Override
+    public Transaction getTransactionById(String id) {
+        return transactionRepository.findById(id)
+                .orElseThrow(() -> new TransactionNotFoundException("Transaction not found with ID: " + id));
+    }
+
+    @Override
+    public List<Transaction> getTransactionsByUserId(String userId) {
+        return transactionRepository.findByUserId(userId);
+    }
+
+    @Override
+    public List<Transaction> getTransactionsByOrderId(String orderId) {
+        return transactionRepository.findByOrderId(orderId);
+    }
+}
