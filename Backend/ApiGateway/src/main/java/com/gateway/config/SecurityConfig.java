@@ -20,25 +20,42 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
+    SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
         return http
-            .authorizeExchange(exchanges -> exchanges
-           //     .pathMatchers("/public/**").permitAll()   // Public routes, no auth required
-                .pathMatchers("/userservice/**", "/userservice/**").permitAll() // we can access without authentication
-                .pathMatchers(HttpMethod.GET,"/portfolioservice/portfolio/add", "/portfolioservice/portfolio/getInvestment/{id}", "/portfolioservice/portfolio/getInvestment").hasRole("ROLE_user")
-                .pathMatchers(HttpMethod.DELETE,  "/portfolioservice/portfolio/delete/{name}").hasRole("ROLE_user")
-                .pathMatchers(HttpMethod.GET,"/portfolioservice/portfolio/update","portfolioservice/portfolio/test","/portfolioservice/portfolio/all").hasRole("ROLE_admin")
-                .pathMatchers(HttpMethod.GET,"/debt/debt/test", "/debt/debt/debts", "debt/debt/user/{userId}").hasRole("ROLE_admin")
-                .pathMatchers(HttpMethod.GET,"/debt/debt/add", "/debt/debt/calculate-emi", "debt/debt/total-interest", "debt/debt/generate-schedule").hasRole("ROLE_user")
-                .pathMatchers(HttpMethod.GET,"/transaction/transaction/test", "/transaction/transaction/getAll").hasRole("ROLE_admin")
-                .pathMatchers(HttpMethod.GET,"/transaction/transaction/create", "/transaction/transaction/update/{transactionId}", "delete/{transactionId}").hasRole("ROLE_user")
-                .pathMatchers(HttpMethod.DELETE,"/transaction/transaction/delete/{transactionId}").hasRole("ROLE_user")
-                .pathMatchers(HttpMethod.GET,"/budgetservice/budget/test", "/budgetservice/budget/getbybudgetid/{id}", "/budgetservice/budget/getbyuserid", "/budgetservice/budget/getbybudgetcategory/{cat}", "/budgetservice/budget/getcategory", "/budgetservice/budget/deletebybudgetid/{budgetid}", "/budgetservice/budget/update").hasRole("ROLE_user")
-                .pathMatchers(HttpMethod.DELETE,"/budgetservice/budget/delete/{category}").hasRole("ROLE_user")        
-                .anyExchange().authenticated()              // All other routes require authentication
+            .csrf(csrf -> csrf.disable())
+            .authorizeExchange(exchange -> exchange
+
+                // Public access (e.g., registration & login)
+                .pathMatchers("/userservice/auth/**").permitAll()
+
+                // ProductService
+                .pathMatchers(HttpMethod.GET, "/productservice/**").hasAnyRole("ROLE_USER", "ROLE_SHOPEKEEPER", "ROLE_ADMIN")
+                .pathMatchers(HttpMethod.POST, "/productservice/**").hasAnyRole("ROLE_SHOPEKEEPER", "ROLE_ADMIN")
+                .pathMatchers(HttpMethod.PUT, "/productservice/**").hasAnyRole("ROLE_SHOPEKEEPER", "ROLE_ADMIN")
+                .pathMatchers(HttpMethod.DELETE, "/productservice/**").hasRole("ROLE_ADMIN")
+
+                // CartService
+                .pathMatchers("/cartservice/**").hasRole("ROLE_USER")
+
+                // OrderService
+                .pathMatchers("/orderservice/**").hasRole("ROLE_USER")
+
+                // TransactionService
+                .pathMatchers(HttpMethod.GET, "/transactionservice/all").hasRole("ROLE_ADMIN")
+                .pathMatchers("/transactionservice/**").hasRole("ROLE_USER")
+
+                // WalletService (optional)
+                .pathMatchers("/walletservice/**").hasRole("ROLE_USER")
+
+                // NotificationService (internal, deny access from outside)
+                .pathMatchers("/notificationservice/**").denyAll()
+
+                // Everything else must be authenticated
+                .anyExchange().authenticated()
             )
-            .addFilterAt(jwtAuthenticationFilter, SecurityWebFiltersOrder.AUTHENTICATION) // Add JWT filter
-            .csrf().disable()  // Disable CSRF for stateless APIs
+            .addFilterAt(jwtAuthenticationFilter, SecurityWebFiltersOrder.AUTHENTICATION)
             .build();
     }
+
+
 }

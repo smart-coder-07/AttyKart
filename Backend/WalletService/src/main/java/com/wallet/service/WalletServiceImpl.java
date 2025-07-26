@@ -1,7 +1,6 @@
 package com.wallet.service;
 
 import java.util.List;
-import java.util.Random;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -73,7 +72,7 @@ public class WalletServiceImpl implements WalletService {
     	try {
     				webClientBuilder.build()
 					.post()
-					.uri("http://TRANSACTIONSERVICE")
+					.uri("http://TRANSACTIONSERVICE/api")
 					.bodyValue(transaction)
 					.retrieve()
 					.bodyToMono(Transaction.class)

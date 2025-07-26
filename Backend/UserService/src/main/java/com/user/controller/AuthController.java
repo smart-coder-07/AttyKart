@@ -43,7 +43,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String addNewUser(@RequestBody @Valid User user) {
+    public User addNewUser(@RequestBody @Valid User user) {
         return service.saveUser(user);
     }
 
@@ -72,5 +72,10 @@ public class AuthController {
     public String validateToken(@RequestParam String token) {
         service.validateToken(token);
         return "Token is valid";
+    }
+    
+    @GetMapping("/user/{username}")
+    public User getByUserName(@Valid @PathVariable String username) {
+    	return service.getByUserName(username);
     }
 }

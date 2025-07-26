@@ -33,7 +33,7 @@ public class User {
     private String id;
     @NotBlank(message = "Name cannot be empty")
     @Size(min = 3, message = "Name must be at least 3 characters long")
-    @Pattern(regexp = "^[A-Za-z ]+$", message = "Name must contain only letters and spaces")
+    @Pattern(regexp = "^[A-Za-z0-9 ]+$", message = "Name must contain only letters and spaces")
     private String username;
     @NotBlank(message = "Email cannot be empty")
     @Email(message = "Invalid email format")
@@ -42,7 +42,7 @@ public class User {
     @Size(min = 4, message = "Password must be at least 4 characters long")
     private String password;
     @NotBlank(message = "Role cannot be empty")
-    @Pattern(regexp = "^(USER|ADMIN|user|admin)$", message = "Role must be either 'USER' or 'ADMIN'")
+    @Pattern(regexp = "^(USER|ADMIN|SHOPEKEEPER|user|admin|shopekeeper)$", message = "Role must be 'USER' or 'ADMIN' or 'SHOPEKEEPER'")
     private String role;
     
     

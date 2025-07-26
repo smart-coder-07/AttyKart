@@ -92,7 +92,7 @@ public class OrderServiceImpl implements OrderService {
         try {
             return webClientBuilder.build()
                     .get()
-                    .uri("http://CARTSERVICE/user/" + userId)
+                    .uri("http://CARTSERVICE/api/user/" + userId)
                     .retrieve()
                     .bodyToFlux(CartItem.class)
                     .collectList()
@@ -105,7 +105,7 @@ public class OrderServiceImpl implements OrderService {
         try {
             webClientBuilder.build()
                     .delete()
-                    .uri("http://CARTSERVICE/clear/" + userId)
+                    .uri("http://CARTSERVICE/api/clear/" + userId)
                     .retrieve()
                     .bodyToMono(Void.class) 
                     .block(); 
@@ -120,7 +120,7 @@ public class OrderServiceImpl implements OrderService {
             try {
                 Product product = webClientBuilder.build()
                         .get()
-                        .uri("http://PRODUCTSERVICE/" + item.getProductId())
+                        .uri("http://PRODUCTSERVICE/api/" + item.getProductId())
                         .retrieve()
                         .bodyToMono(Product.class)
                         .block();
@@ -137,7 +137,7 @@ public class OrderServiceImpl implements OrderService {
     	try {
     				webClientBuilder.build()
 					.post()
-					.uri("http://TRANSACTIONSERVICE")
+					.uri("http://TRANSACTIONSERVICE/api")
 					.bodyValue(transaction)
 					.retrieve()
 					.bodyToMono(Transaction.class)
@@ -151,7 +151,7 @@ public class OrderServiceImpl implements OrderService {
     	try {
     		webClientBuilder.build()
     		.post()
-    		.uri("http://WALLETSERVICE/deduct")
+    		.uri("http://WALLETSERVICE/api/deduct")
     		.bodyValue(wallet)
     		.retrieve()
     		.bodyToMono(Wallet.class)
@@ -179,7 +179,7 @@ public class OrderServiceImpl implements OrderService {
 //                .retrieve()
 //                .bodyToMono(Void.class)
 //                .subscribe();
-        	String str = restTemplate.postForObject("http://MAILSERVICE", event, String.class);
+        	String str = restTemplate.postForObject("http://MAILSERVICE/api", event, String.class);
         	System.out.println(str);
         } catch (Exception e) {
             e.printStackTrace();

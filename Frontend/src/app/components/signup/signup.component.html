@@ -1,0 +1,84 @@
+<section
+  class="mt-36 max-h-auto mb-12 max-w-xl p-6 mx-auto bg-white rounded-md shadow-lg dark:bg-gray-800"
+>
+  <h2
+    class="text-lg text-center mb-5 font-semibold text-gray-700 capitalize dark:text-white"
+  >
+    User Registration
+  </h2>
+
+  <form>
+    <div class="gap-6 mt-4 sm:grid-cols-2">
+      <div>
+        <label class="text-gray-700 dark:text-gray-200" for="username"
+          >Username</label
+        >
+        <input
+          [(ngModel)]="userInfo.username"
+          name="username"
+          id="username"
+          type="text"
+          class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+        />
+      </div>
+
+      <div>
+        <label class="text-gray-700 dark:text-gray-200" for="emailAddress"
+          >Email Address</label
+        >
+        <input
+          [(ngModel)]="userInfo.email"
+          name="email"
+          id="emailAddress"
+          type="email"
+          class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+        />
+      </div>
+
+      <div>
+        <label class="text-gray-700 dark:text-gray-200" for="password"
+          >Password</label
+        >
+        <input
+          [(ngModel)]="userInfo.password"
+          name="password"
+          id="password"
+          type="password"
+          class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+        />
+      </div>
+      <!-- <label class="text-gray-700 dark:text-gray-200" for="role">Role</label> -->
+      <div class="flex items-center">
+        <div>
+          <label class="text-gray-700 dark:text-gray-200" for="role"
+            >Role</label
+          >
+          <select
+            [(ngModel)]="userInfo.role"
+            name="role"
+            id="role"
+            class="flex w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+          >
+            <option value="admin">Admin</option>
+            <option value="user">User</option>
+            <option value="shopekeeper">ShopeKeeper</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex justify-between mt-6">
+      <p>
+        <a routerLink="/login" class="text-blue-500 font-bold mr-3 underline"
+          >Login</a
+        >If you have already an account
+      </p>
+      <button
+        (click)="userRegister()"
+        class="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:bg-blue-800"
+      >
+        Signup
+      </button>
+    </div>
+  </form>
+</section>

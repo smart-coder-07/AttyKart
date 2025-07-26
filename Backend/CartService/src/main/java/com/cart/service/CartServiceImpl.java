@@ -29,7 +29,7 @@ public class CartServiceImpl implements CartService {
             // Fetch product details from ProductService
             product = webClientBuilder.build()
                     .get()
-                    .uri("http://PRODUCTSERVICE/" + cartItem.getProductId())
+                    .uri("http://PRODUCTSERVICE/api/" + cartItem.getProductId())
                     .retrieve()
                     .onStatus(HttpStatusCode::is4xxClientError, response ->
                             Mono.error(new CartNotFoundException("Product not found in ProductService")))
