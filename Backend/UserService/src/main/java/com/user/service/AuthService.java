@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.user.dto.ResponseDto;
 import com.user.entity.User;
 import com.user.exception.UserCustomException;
 import com.user.repository.UserCredentialRepository;
@@ -31,7 +30,7 @@ public class AuthService {
     	
     	
         credential.setPassword(passwordEncoder.encode(credential.getPassword()));
-//        credential.setId(repository.count() + 1 + "");
+        credential.setId((int) repository.count() + 1);
         credential.setRole(credential.getRole().toUpperCase());
         return repository.save(credential);
         
