@@ -5,4 +5,11 @@
 	<list key="searchhistory">
 		<item value="securityWebFilterChain"/>
 	</list>
+	<section name="java.lang.Class">
+		<item key="replaceBarOpen" value="false"/>
+		<list key="findhistory">
+			<item value="mys"/>
+			<item value="mon"/>
+		</list>
+	</section>
 </section>

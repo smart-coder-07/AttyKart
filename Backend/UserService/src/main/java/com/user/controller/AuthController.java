@@ -38,7 +38,7 @@ public class AuthController {
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity<User> findUserById(@PathVariable @Valid String id){
+    public ResponseEntity<User> findUserById(@PathVariable @Valid int id){
     	return new ResponseEntity<>(service.getById(id),HttpStatus.ACCEPTED);
     }
 

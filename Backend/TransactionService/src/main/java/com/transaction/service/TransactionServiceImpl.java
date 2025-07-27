@@ -20,14 +20,14 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public Transaction processTransaction(Transaction transaction) {
         transaction.setTransactionDate(LocalDate.now());
-        transaction.setId(transactionRepository.count()+1+"");
+//        transaction.setId(transactionRepository.count()+1+"");
         transaction.setTransactionStatus("SUCCESS");// Default status
         return transactionRepository.save(transaction);
     }
 
     @Override
     public Transaction getTransactionById(String id) {
-        return transactionRepository.findById(id)
+        return transactionRepository.findById(Integer.parseInt(id))
                 .orElseThrow(() -> new TransactionNotFoundException("Transaction not found with ID: " + id));
     }
 

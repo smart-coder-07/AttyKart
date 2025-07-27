@@ -28,7 +28,7 @@ public class WalletServiceImpl implements WalletService {
                     // If not exists, create a new one
                     Wallet newWallet = new Wallet();
                     newWallet.setUserId(transaction.getUserId());
-                    newWallet.setId(walletRepository.count()+1+"");
+//                    newWallet.setId(walletRepository.count()+1);
                     newWallet.setAmount(0.0);
                     return newWallet;
                 });

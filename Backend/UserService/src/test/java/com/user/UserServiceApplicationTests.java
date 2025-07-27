@@ -36,7 +36,7 @@ class UserServiceApplicationTests {
 
 	    @Test
 	    void testRegisterUser() {
-	        User user = new User("1", "john", "pass123", "user", "john@example.com");
+	        User user = new User(1, "john", "pass123", "user", "john@example.com");
 
 	        when(userRepository.save(any(User.class))).thenReturn(user);
 
@@ -49,22 +49,22 @@ class UserServiceApplicationTests {
 
 	    @Test
 	    void testGetUserById() {
-	        User user = new User("1", "john", "pass123", "user", "john@example.com");
+	        User user = new User(1, "john", "pass123", "user", "john@example.com");
 
-	        when(userRepository.findById("1")).thenReturn(Optional.of(user));
+	        when(userRepository.findById(1)).thenReturn(Optional.of(user));
 
-	        User found = userService.getById("1");
+	        User found = userService.getById(1);
 
 	        assertNotNull(found);
 	        assertEquals("john", found.getUsername());
-	        verify(userRepository).findById("1");
+	        verify(userRepository).findById(1);
 	    }
 
 	    @Test
 	    void testGetAllUsers() {
 	        List<User> users = List.of(
-	            new User("1", "john", "pass", "user", "john@example.com"),
-	            new User("2", "jane", "pass", "admin", "jane@example.com")
+	            new User(1, "john", "pass", "user", "john@example.com"),
+	            new User(2, "jane", "pass", "admin", "jane@example.com")
 	        );
 
 	        when(userRepository.findAll()).thenReturn(users);

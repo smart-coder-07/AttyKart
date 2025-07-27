@@ -66,9 +66,9 @@ public class OrderServiceImpl implements OrderService {
         order.setItems(orderItems);
         order.setTotalAmount(totalAmount);
         order.setOrderStatus("PENDING");
-        order.setId(orderRepository.count()+1+"");
+//        order.setId(orderRepository.count()+1+"");
         t.setAmount(totalAmount);
-        t.setOrderId(order.getId());
+        t.setOrderId(order.getId()+"");
         t.setUserId(order.getUserId());
         t.setType("DEBIT");
         saveTransaction(t);
@@ -190,7 +190,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order updateOrderStatus(String id, String status) {
-        Order existingOrder = orderRepository.findById(id)
+        Order existingOrder = orderRepository.findById(Integer.parseInt(id))
                 .orElseThrow(() -> new OrderNotFoundException(OrderServiceImpl.mess + id));
 
         existingOrder.setOrderStatus(status);
@@ -199,7 +199,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void cancelOrder(String id) {
-        Order existingOrder = orderRepository.findById(id)
+        Order existingOrder = orderRepository.findById(Integer.parseInt(id))
                 .orElseThrow(() -> new OrderNotFoundException(OrderServiceImpl.mess + id));
 
         existingOrder.setOrderStatus("CANCELLED");
@@ -208,7 +208,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order getOrderById(String id) {
-        return orderRepository.findById(id)
+        return orderRepository.findById(Integer.parseInt(id))
                 .orElseThrow(() -> new OrderNotFoundException(OrderServiceImpl.mess + id));
     }
 

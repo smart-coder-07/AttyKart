@@ -19,6 +19,7 @@ import reactor.core.publisher.Mono;
 @Service
 @RequiredArgsConstructor
 public class CartServiceImpl implements CartService {
+	
 	 private final CartRepository cartRepository;
 	 private final WebClient.Builder webClientBuilder;
 
@@ -45,7 +46,7 @@ public class CartServiceImpl implements CartService {
             cartItem.setProductName(product.getName());
             cartItem.setPrice(product.getPrice());
             cartItem.setImage(product.getImage());
-            cartItem.setId(cartRepository.count()+1+"");
+//            cartItem.setId(cartRepository.count()+1+"");
 
             return cartRepository.save(cartItem);
 
@@ -58,7 +59,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public CartItem updateCartItem(String id, CartItem cartItem) {
-        CartItem existingCartItem = cartRepository.findById(id)
+        CartItem existingCartItem = cartRepository.findById(Integer.parseInt(id))
                 .orElseThrow(() -> new CartNotFoundException("Cart item not found with ID: " + id));
         existingCartItem.setQuantity(cartItem.getQuantity());
         return cartRepository.save(existingCartItem);
@@ -66,10 +67,10 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public void removeCartItem(String id) {
-        if (!cartRepository.existsById(id)) {
+        if (!cartRepository.existsById(Integer.parseInt(id))) {
             throw new CartNotFoundException("Cart item not found with ID: " + id);
         }
-        cartRepository.deleteById(id);
+        cartRepository.deleteById(Integer.parseInt(id));
     }
 
     @Override

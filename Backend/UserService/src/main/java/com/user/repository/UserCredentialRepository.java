@@ -1,14 +1,14 @@
 package com.user.repository;
 
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
 //import org.springframework.data.jpa.repository.JpaRepository;
 
 
 import com.user.entity.User;
 
-import java.util.Optional;
-
-import org.springframework.data.mongodb.repository.MongoRepository;
-
-public interface UserCredentialRepository  extends MongoRepository<User,String> {
+public interface UserCredentialRepository  extends JpaRepository<User,Integer> {
     Optional<User> findByUsername(String username);
 }

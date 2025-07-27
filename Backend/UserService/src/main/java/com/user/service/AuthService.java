@@ -31,7 +31,7 @@ public class AuthService {
     	
     	
         credential.setPassword(passwordEncoder.encode(credential.getPassword()));
-        credential.setId(repository.count() + 1 + "");
+//        credential.setId(repository.count() + 1 + "");
         credential.setRole(credential.getRole().toUpperCase());
         return repository.save(credential);
         
@@ -45,7 +45,7 @@ public class AuthService {
         jwtService.validateToken(token);
     }
     
-    public User getById(String id) {
+    public User getById(int id) {
     	return repository.findById(id).orElseThrow(()-> new UserCustomException("User not found"));
     }
     public List<User> getAllUsers(){
