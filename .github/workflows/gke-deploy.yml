@@ -56,4 +56,4 @@ jobs:
 
       - name: Deploy to GKE
         run: |
-          kubectl apply -f k8s-manifests/
+          kubectl apply -f Backend/k8s-manifests/
