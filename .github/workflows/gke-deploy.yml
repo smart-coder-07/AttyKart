@@ -35,7 +35,7 @@ jobs:
       - name: Build JARs and Docker Images
         run: |
           cd Backend
-          for service in UserService ProductService CartService OrderService WalletService MailService TransactionService EurekaServer APIGateway; do
+          for service in UserService ProductService CartService OrderService WalletService MailService TransactionService EurekaServer ApiGateway; do
             if [ -d "$service" ]; then
               cd $service
               chmod +x mvnw
