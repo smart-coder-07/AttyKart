@@ -1,0 +1,48 @@
+name: GKE CI/CD Pipeline Of Github Actions
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: "17"
+          distribution: "temurin"
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
+
+      - name: Configure Docker for GCR
+        run: gcloud auth configure-docker
+
+      - name: Build JARs and Docker Images
+        run: |
+          for service in UserService ProductService CartService OrderService WalletService MailService TransactionService EurekaServer APIGateway; do
+            cd $service
+            ./mvnw clean package -DskipTests
+            docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/$service:latest .
+            docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/$service:latest
+            cd ..
+          done
+
+      - name: Get GKE Credentials
+        run: |
+          gcloud container clusters get-credentials ${{ secrets.GKE_CLUSTER_NAME }} --zone ${{ secrets.GKE_ZONE }}
+
+      - name: Deploy to GKE
+        run: |
+          kubectl apply -f k8s-manifests/
