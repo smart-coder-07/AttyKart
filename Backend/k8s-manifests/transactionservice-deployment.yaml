@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: transactionservice
+  labels:
+    app: transactionservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: transactionservice
+  template:
+    metadata:
+      labels:
+        app: transactionservice
+    spec:
+      containers:
+        - name: transactionservice
+          image: gcr.io/attykart/transactionservice:latest
+          ports:
+            - containerPort: 8500

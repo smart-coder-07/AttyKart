@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mailservice
+  labels:
+    app: mailservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mailservice
+  template:
+    metadata:
+      labels:
+        app: mailservice
+    spec:
+      containers:
+        - name: mailservice
+          image: gcr.io/attykart/mailservice:latest
+          ports:
+            - containerPort: 8700
