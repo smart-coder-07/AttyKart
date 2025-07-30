@@ -40,8 +40,9 @@ jobs:
               cd $service
               chmod +x mvnw
               ./mvnw clean package -DskipTests
-              docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/$service:latest .
-              docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/$service:latest
+              lowercase_service=$(echo $service | tr '[:upper:]' '[:lower:]')
+              docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/$lowercase_service:latest .
+              docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/$lowercase_service:latest
               cd ..
             else
               echo "Directory $service not found!"
