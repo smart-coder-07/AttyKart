@@ -38,6 +38,7 @@ jobs:
           for service in UserService ProductService CartService OrderService WalletService MailService TransactionService EurekaServer APIGateway; do
             if [ -d "$service" ]; then
               cd $service
+              chmod +x mvnw
               ./mvnw clean package -DskipTests
               docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/$service:latest .
               docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/$service:latest
